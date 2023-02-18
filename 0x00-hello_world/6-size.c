@@ -4,7 +4,6 @@
  * main - prints the size of various types base on
  * on the computer it is compiled and run on..
  * Return: Always 0.
- *
  */
 
 int main(void)
