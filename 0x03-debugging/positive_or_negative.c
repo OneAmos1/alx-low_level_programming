@@ -1,6 +1,7 @@
 #include "main.h"
-
-/** positive_or_negative - to check for either positive or negative
+/**
+ * positive_or_negative - to check for either positive or negative
+ *@i:(positiv_negativee)
  */
 
 void positive_or_negative(int i)
