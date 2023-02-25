@@ -13,7 +13,7 @@ int ct = 0;
 
 if (n < 0)
 {
-		_putchar ('-');
+_putchar ('-');
 ld = (char)('0' - (n % 10));
 n = n / -10;
 }
