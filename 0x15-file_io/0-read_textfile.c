@@ -36,6 +36,11 @@ bytes_read = read(fptr, buffer, letters);
 
 
 close(fptr);
+if (bytes_read == -1)
+{
+free(buffer);
+return (0);
+}
 
 bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
 free(buffer);
