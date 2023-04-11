@@ -6,38 +6,43 @@
 /**
  * read_textfile - A function that reads a text file and
  * prints the text to the posix standard output.
- * @filename: A pointer to a string containing the
- * name of the text file to read.
+ * @filename: A pointer to a string containing
+ * the name of the text file to read.
  * @letters: The number of bytes to read from the file.
  * Return: The number of bytes read, or 0 on failure.
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-FILE *fptr;
+int fptr;
 char *buffer;
-ssize_t bytes_read;
+ssize_t bytes_read, bytes_written;
 
 if (filename == NULL)
 return (0);
 
-buffer = malloc(sizeof(char) * (letters + 1));
+buffer = malloc(sizeof(char) * letters);
+
 if (buffer == NULL)
 return (0);
+fptr = open(filename, O_RDONLY);
 
-fptr = fopen(filename, "r");
-if (fptr == NULL)
+if (fptr == -1)
 {
 free(buffer);
 return (0);
 }
 
-bytes_read = fread(buffer, sizeof(char), letters, fptr);
+bytes_read = read(fptr, buffer, letters);
 
-buffer[bytes_read] = '\0';
 
-fclose(fptr);
-printf("%s", buffer);
+close(fptr);
+
+bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
+free(buffer);
+if (bytes_written == -1 || bytes_written != bytes_read)
+return (0);
 
 free(buffer);
+
 return (bytes_read);
 }
